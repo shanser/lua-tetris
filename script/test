@@ -1,0 +1,9 @@
+#!/usr/bin/env lua
+require '../config'
+require '../lib/luaunit/luaunit'
+
+for i in io.popen("ls test/model"):lines() do
+  require(i:sub(0, -5))
+end
+
+LuaUnit:run()

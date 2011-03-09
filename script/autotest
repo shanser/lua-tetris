@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+OLD=""
+while [ 1 ]; do
+  NEW=`ls -Rl`
+  
+  if [ "$NEW" != "$OLD" ]; then
+    clear cmdwin
+    time (lua script/test)
+    OLD=$NEW
+  fi
+  sleep 1
+done
