@@ -16,4 +16,24 @@ function leTempsPasse( event)
 end
 
 leTempsPasse()
-timer.performWithDelay( 80, leTempsPasse, 0 )
+timer.performWithDelay( 800, leTempsPasse, 0 )
+
+function touche( event )
+  if event.phase == 'began' then
+    startX = event.x
+  else
+    if event.x == startX then
+      return
+    end
+    if event.x > startX then
+      sens = 1
+    else
+      sens = -1
+    end
+    startX = event.x
+    grille.deplacementLateral(sens)
+    grilleView.draw()
+  end
+end
+
+Runtime:addEventListener('touch', touche)

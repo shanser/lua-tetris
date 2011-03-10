@@ -15,3 +15,32 @@ TestCase = {}
     case.piece = nouvellePiece
     assertEquals(nouvellePiece, case.piece)
   end
+  
+  function TestCase:testDeplacePieceEstFauxAvecUneDestinationVide()
+    succes = Case.deplacePiece(case, nil)
+    assertEquals(false, succes)
+  end
+  
+  function TestCase:testDeplacePieceEstVraiQuandLeDeplacementFonctionne()
+    succes = Case.deplacePiece(Case.new(), Case.new())
+    assertEquals(true, succes)
+  end
+  
+  function TestCase:testDeplacePieceEstFauxQuandLaDestinationNEstPasLibre()
+    caseOccupee = Case.new()
+    caseOccupee.piece = Piece.new()
+    succes = Case.deplacePiece(Case.new(), caseOccupee)
+    assertEquals(false, succes)
+  end
+  
+  function TestCase:testDeplacePieceFigeLOrigineEnCaseEchecSiDemande()
+    caseOrigine = Case.new()
+    Case.deplacePiece(caseOrigine, nil, true)
+    assertEquals(true, caseOrigine.figee)
+  end
+
+  function TestCase:testDeplacePieceFigePasLOrigineEnCaseEchecSiPasDemande()
+    caseOrigine = Case.new()
+    Case.deplacePiece(caseOrigine, nil, false)
+    assertEquals(false, caseOrigine.figee)
+  end
